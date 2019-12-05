@@ -1,5 +1,3 @@
-package rna;
-
 // Classe para representar o neurônio artificial.
 
 public class Neuronio {
@@ -38,6 +36,14 @@ public class Neuronio {
     public double getSaida(double entrada[]) {
         double v = juncaoAditiva(entrada);
         return fncAtivacao.aplicar(v);
+    }
+
+    public void imprimirPesos() {
+        System.out.printf("Bias = %.2f ", bias);
+        for (Double w : pesos) {
+            System.out.printf("%.2f ", w);
+        }
+        System.out.println("");
     }
 
 }

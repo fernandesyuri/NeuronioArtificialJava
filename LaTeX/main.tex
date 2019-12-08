@@ -1,0 +1,171 @@
+\documentclass[12pt]{article}
+
+% Estrutura do documento.
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=25mm,
+ top=25mm,
+ right=20mm
+ }
+ 
+% Permite que o texto fique justificado
+\usepackage[document]{ragged2e}
+
+% Permite colocar palavras com acentos e configura como língua padrão o português
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+
+% Permite carregar imagens no documento.
+\usepackage{graphicx}
+\usepackage{indentfirst}
+
+% Fontes...
+%\usepackage{bookman}
+%\usepackage{boisik}
+\usepackage{kpfonts}
+
+% Para definir o espaçamento entre as linhas
+\usepackage{setspace}
+
+% Permite mostrar trechos de códigos/pseudocódigo no documento
+\usepackage{listingsutf8}
+\usepackage{color}
+
+% Algumas cores
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{lgray}{rgb}{0.960, 0.960, 0.960}
+\definecolor{lblue}{rgb}{0.184, 0.552, 0.654}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{dkblue}{rgb}{0.109, 0.125, 0.592}
+
+% Define como serão exibidos código no documento.
+\lstset{frame=lines,
+  inputencoding=utf8/latin1,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numbersep=1mm,
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,backgroundcolor=\color{lgray},    
+  columns=fullflexible,
+  breakautoindent=false,
+  framerule=1pt,
+  columns=fixed,
+  xleftmargin=0.5cm
+}
+
+\begin{document}
+\justifying
+\begin{center}
+    % espaçamento 1.5
+    \onehalfspacing
+    
+    \Large{INSTITUTO FEDERAL DO SUL DE MINAS GERAIS}
+    
+    \normalsize{Campus Poços de Caldas}
+    
+    \vspace{0.5cm}
+    \includegraphics[scale=0.1]{img/pcs-logo.eps}
+    
+    \LARGE{\textbf{Método de Newton para o Aprendizado do Neurônio Artificial}}
+    
+    \large{\textbf{Joaquim Augusto Pomarico}$^{1}$, \textbf{Marcos Vinícius Moreira}$^{2}$, \textbf{Otávio Messias Palma}$^{3}$, \textbf{Pablo Borges dos Santos}$^{4}$, \textbf{Yuri Fernandes}$^{5}$,}
+    
+    \normalsize{\texttt{joaquim.cioffi@alunos.ifsuldeminas.edu.br$^{1}$}, \texttt{ marcos@alunos.ifsuldeminas.edu.br$^{2}$}, \texttt{ otavio.palma@alunos.ifsuldeminas.edu.br$^{3}$},\texttt{ pablo.borges@alunos.ifsuldeminas.edu.br$^{4}$},\texttt{ yuri@alunos.ifsuldeminas.edu.br$^{5}$}}
+    
+    Poços de Caldas, 09 de Dezembro de 2019
+\end{center}
+
+\noindent\textbf{Resumo:} \textit{Para uma rede neural complexa, com parâmetros muito grandes, a tarefa de encontrar o mínimo dentre vários vales contido em tal superfície é muito difícil e custosa. 
+Conforme visto na disciplina, um dos métodos para encontrar tal mínimo é a utilização do Método Gradiente Descendente. Todavia, para redes neurais grandes e com mais de uma camada oculta, o método gradiente se torna menos eficiente.
+Um dos problemas para uso do método gradiente em grandes redes é o fato do mesmo utilizar método de otimização de primeira ordem, assumindo sempre que a superfície da rede é um plano, sem contar com curvaturas. Uma das soluções para os pontos negativos do método gradiente é aplicação do método de Newton. 
+O método de Newton é um método iterativo de aproximação, geralmente utilizado em problemas de otimização de segunda ordem e para aproximação de funções.} 
+
+\section{Introdução} 
+
+\begin{itemize}
+    \item Utilização do Método de Newton para aprendizado do Neurônio Artifical ao invés do Método do Gradiente visto em sala.
+    \item O algoritimo utilizado foi o RNA desenvolvido em sala junto do professor da disciplina, sendo que foram feitas alterações na evolução dos neurônios com a implementação do Método de Newton.
+    \item Foi utilizada a lingugaem de programação Java e as IDEs VSCode e NetBeans.
+    \item Breve descrição dos resultados.
+\end{itemize}
+
+\section{Fundamentação teórica}
+
+\begin{itemize}
+    \item Em análise numérica, o método de Newton, desenvolvido por Isaac Newton e Joseph Raphson, tem como objetivo estimar raízes de uma função, para isto escolhe-se uma aproximação inicial para esta e calcula-se a equação da reta tangente (através de uma derivada) da função neste ponto e a interseção dela com o eixo das abcissas, a fim de se encontrar uma melhor aproximação para a raíz. Repetindo-se o processo, cria-se um método iterativo para encontrarmos a raíz da função.
+    \item Fórmula do Método de Newton:
+    \begin{equation}
+        x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}, n \in \mathbb{N}
+    \end{equation}
+    \begin{center}
+        \small{\texttt{Onde o valor inicial de x é estimado no começo da iteração.}}
+    \end{center}
+\end{itemize}
+
+\section{Algoritmo}
+
+\begin{itemize}
+    \item O algoritmo é fundamentalmente o mesmo implementado em aulas com algumas pequenas alterações. 
+    \item A função de ativação definida para uso foi a Limiar segundo conselho do professor. A rede neural artificial escolhida foi o Perceptron, novamente sob conselho do professor, dessa forma, não é possível lidar com mais de 2 camadas.
+    \item A Rede Neural Artifical Perceptron é inicializada com o número de entradas adequado ao caso e tem a função de ativação configurada junto do número de épocas e dos vetores de aprendizado (entrada e saída esperada).
+    \item Durante o aprendizado, atualiza-se os pesos da entradas a partir do valor inicial estimado, que no caso do algoritmo é gerado de forma aleatória entre 0,0 e 1,0. A cada iteração nova, calcula-se o erro até que este seja zerado, o que signifca que o valor desejado foi encontrado.
+    \item Utilizando o método de Newton, diferente do Método do Gradiente, temos a possibilidade de estar dividindo por 0, dessa forma trata-se esse caso somente replicando o valor da entrada para a próxima iteração.
+    \item No final da iteração mostra-se o erro total da epoca, caso seja 0 a execução foi bem sucedida, caso contrário não.
+    \item No caso de uma execução bem sucedida o valor de saída indicado na linha abaixo será de acordo com os dados de entrada.
+    \item A ideia de usar o algoritmo pronto veio da própria sugestão do professor que nos orientou a somente fazer as mudanças no código ao invés de refatorá-lo inteiro. Pode-se aproveitar do código pronto e focar nas alterações necessárias com mais afinco visto que não precisamos nos preocupar com a funcionalidade do código que ja fora definida como confiável previamente.
+\end{itemize}
+
+\section{Recursos de implementação}
+
+\begin{itemize}
+    \item Foi utilizado apenas a linguagem de programação Java para realização do trabalho.
+    \item As IDEs NetBeans e VSCode foram utilizadas para escrever o algoritmo. O serviço GitKraken foi utilizado para versionamento do mesmo. 
+    \item Nenhuma biblioteca se mostrou necessária na implementação do Algoritmo.
+    \item Nenhuma base de dados se mostrou necessária na implementação do Algoritmo, apenas entradas baseadas em vetores de inteiros com suas respectivas saidas em outro vetor de inteiros.
+\end{itemize}
+
+\section{Código fonte}
+
+\begin{itemize}
+    \item Código fonte deverá ser enviado junto com este relatório.
+    \item Não enviar o programa compilado.
+    \item Descrever como compilar e executar o programa, se necessário.
+    \item Apresentar os aspectos mais importantes da implementação. Veja o exemplo a seguir.
+\end{itemize}
+
+\lstinputlisting[language=Java]{codigo/Main.java}
+
+\section{Conclusão}
+
+\begin{itemize}
+    \item Descrever os resultados obtidos com a aplicação do algoritmo sobre o contexto.
+    \item Descrever quaisquer limitações encontradas.
+    \item Descrever a contribuição do trabalho para a construção do conhecimento do grupo.
+\end{itemize}
+
+\noindent\textbf{Observações:} Serão avaliados: o relatório do trabalho prático, o código fonte e a aplicação do algoritmo sobre o contexto prático.
+
+\begin{equation}
+    NF = (NC+NR+NA)*0.1,
+\end{equation}
+
+\noindent onde:
+\begin{itemize}
+    \item $NF$: é a nota final do trabalho.
+    \item $NR$: é a nota sobre o relatório.
+    \item $NC$: é a nota da implementação, do código fonte do algoritmo e dos seus resultados sobre o contexto prático.
+    \item $NA$: é a nota da apresentação e arguição oral do trabalho.
+    \item $NC \in [0,10], NR \in [0,10], NA \in [0,10]$ e $NF \in [0,3]$.
+\end{itemize}
+
+\end{document}

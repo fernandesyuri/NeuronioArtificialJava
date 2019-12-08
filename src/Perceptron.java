@@ -7,6 +7,8 @@ public class Perceptron extends Neuronio {
     // Define qual será a taxa de aprendizado do Perceptron;
     private int numeroEpocas;
 
+    private double taxaAprendizado;
+
     public Perceptron(int numEntradas) {
         super(numEntradas);
         configurarPesosAleatorios();
@@ -20,6 +22,10 @@ public class Perceptron extends Neuronio {
         this.numeroEpocas = numeroEpocas;
     }
 
+    public void setTaxaAprendizado(double ta) {
+        this.taxaAprendizado = ta;
+    }
+
     public void aprendizado(double dados[][], double saidaDesejada[]) {
         double erroTotal = Double.MAX_VALUE;
         int epoca = 0;
@@ -30,13 +36,14 @@ public class Perceptron extends Neuronio {
                 double erro = saidaDesejada[j] - saidaDoPerceptron;
 
                 for (int i = 0; i < pesos.length; ++i) {
-                    if (dados[j][i] != 0 && erro != 0) {
-                        pesos[i] += (Math.pow(erro, 2)) / (dados[j][i] * erro);
+                    if (dados[j][i] != 0) {
+                        // pesos[i] += taxaAprendizado * (Math.pow(erro, 2)) / (dados[j][i] * erro); // derivada = 2 x erro
+                        pesos[i] += taxaAprendizado * dados[j][i] * erro / 2 * Math.pow(dados[j][i], 2);
                     }
                 }
-                if (erro != 0) {
-                    bias += (Math.pow(erro, 2)) / (erro);
-                }
+                
+                    bias += taxaAprendizado * erro;
+                
                 erroTotal += Math.sqrt(Math.pow(erro, 2));
             }
             epoca++;

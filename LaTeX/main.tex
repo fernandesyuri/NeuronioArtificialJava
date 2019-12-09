@@ -116,6 +116,28 @@ O método de Newton é um método iterativo de aproximação, geralmente utiliza
     \begin{center}
         \small{\texttt{Onde o valor inicial de x é estimado no começo da iteração.}}
     \end{center}
+    
+    \item No aprendizado do neurônio, queremos minimizar a fórmula do erro, ou seja, chegar na raiz da função. Utilizando o método de Newton precisamos calcular a derivada primeira e segunda da equação e utilizá-las para atualizar os pesos e o bias.
+    
+    \item Fórmula do erro:
+    \begin{equation}
+        erro = (y - f(v(w)))^2
+    \end{equation}
+    
+    \item Derivada do erro:
+    \begin{equation}
+        erro' = - 2 * x_0 * (y - f(v(w)))
+    \end{equation}
+    
+    \item Derivada segunda do erro:
+    \begin{equation}
+        erro'' = 2 * x_0^2
+    \end{equation}
+    
+    \item Atualização do pesos do neurônio:
+    \begin{equation}
+        w_{n+1} = w_n * \eta * \frac{x_0 * erro}{x_0^2}
+    \end{equation}
 \end{itemize}
 
 \section{Algoritmo}
@@ -150,7 +172,7 @@ O método de Newton é um método iterativo de aproximação, geralmente utiliza
 \lstinputlisting[language=Java]{codigo/Main.java}
 
 \begin{itemize}
-    \item Classe Perceptron
+    \item Classe Perceptron - Método aprendizado, responsável por atualizar os valores dos pesos.
 \end{itemize}
 \lstinputlisting[language=Java]{codigo/Perceptron.java}
 

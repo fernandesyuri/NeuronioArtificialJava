@@ -28,7 +28,6 @@ public class Perceptron extends Neuronio {
     }
 
     public void aprendizadoFinal(double dados[][], double saidaDesejada[]) {
-
         boolean[] saidaBoolean = new boolean[saidaDesejada.length];
         for (int i = 0; i < saidaDesejada.length; i++) {
             saidaBoolean[i] = saidaDesejada[i] >= 0.5;

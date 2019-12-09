@@ -78,34 +78,40 @@
     
     \LARGE{\textbf{Método de Newton para o Aprendizado do Neurônio Artificial}}
     
-    \large{\textbf{Joaquim Augusto Pomarico}$^{1}$, \textbf{Marcos Vinícius Moreira}$^{2}$, \textbf{Otávio Messias Palma}$^{3}$, \textbf{Pablo Borges dos Santos}$^{4}$, \textbf{Yuri Fernandes}$^{5}$,}
+    \large{\textbf{Joaquim Augusto Pomarico}$^{1}$, \textbf{Marcos Vinícius Moreira}$^{2}$, \textbf{Otávio Messias Palma}$^{3}$, \textbf{Pablo Borges Martins}$^{4}$, \textbf{Yuri Fernandes de Oliveira}$^{5}$,}
     
-    \normalsize{\texttt{joaquim.cioffi@alunos.ifsuldeminas.edu.br$^{1}$}, \texttt{ marcos@alunos.ifsuldeminas.edu.br$^{2}$}, \texttt{ otavio.palma@alunos.ifsuldeminas.edu.br$^{3}$},\texttt{ pablo.borges@alunos.ifsuldeminas.edu.br$^{4}$},\texttt{ yuri@alunos.ifsuldeminas.edu.br$^{5}$}}
+    \normalsize{\texttt{joaquim.cioffi@alunos.ifsuldeminas.edu.br$^{1}$}, \texttt{ marcos.moreira@alunos.ifsuldeminas.edu.br$^{2}$}, \texttt{ otavio.palma@alunos.ifsuldeminas.edu.br$^{3}$},\texttt{ pablo.borges@alunos.ifsuldeminas.edu.br$^{4}$},\texttt{ yuri.oliveira@alunos.ifsuldeminas.edu.br$^{5}$}}
     
     Poços de Caldas, 09 de Dezembro de 2019
 \end{center}
 
 \noindent\textbf{Resumo:} \textit{Para uma rede neural complexa, com parâmetros muito grandes, a tarefa de encontrar o mínimo dentre vários vales contido em tal superfície é muito difícil e custosa. 
 Conforme visto na disciplina, um dos métodos para encontrar tal mínimo é a utilização do Método Gradiente Descendente. Todavia, para redes neurais grandes e com mais de uma camada oculta, o método gradiente se torna menos eficiente.
-Um dos problemas para uso do método gradiente em grandes redes é o fato do mesmo utilizar método de otimização de primeira ordem, assumindo sempre que a superfície da rede é um plano, sem contar com curvaturas. Uma das soluções para os pontos negativos do método gradiente é aplicação do método de Newton. 
-O método de Newton é um método iterativo de aproximação, geralmente utilizado em problemas de otimização de segunda ordem e para aproximação de funções.} 
+Um dos problemas para uso do método gradiente em grandes redes é o fato do mesmo utilizar método de otimização para função de primeiro grau, assumindo sempre que a superfície da rede é um plano, sem contar com curvaturas. Uma das soluções para os pontos negativos do método gradiente é aplicação do método de Newton. 
+O método de Newton é um método iterativo de aproximação, geralmente utilizado em problemas de otimização de segundo grau e para aproximação de funções.} 
 
 \section{Introdução} 
 
 \begin{itemize}
-    \item Utilização do Método de Newton para aprendizado do Neurônio Artifical ao invés do Método do Gradiente visto em sala.
-    \item O algoritimo utilizado foi o RNA desenvolvido em sala junto do professor da disciplina, sendo que foram feitas alterações na evolução dos neurônios com a implementação do Método de Newton.
-    \item Foi utilizada a lingugaem de programação Java e as IDEs VSCode e NetBeans.
-    \item Breve descrição dos resultados.
+    \item Utilização do Método de Newton para aprendizado do Neurônio Artificial ao invés do Método do Gradiente visto em sala.
+    \item O algorítimo utilizado foi o RNA desenvolvido em sala junto do professor da disciplina, sendo que foram feitas alterações na evolução dos neurônios com a implementação do Método de Newton.
+    \item Foi utilizada a linguagem de programação Java e as IDEs VSCode e NetBeans.
+    \item Os resultados obtidos não foram compatíveis com os esperados. O método acaba por não convergir diversas vezes, mas quando converge o realiza de forma mais eficiente que o método do Gradiente.
 \end{itemize}
 
 \section{Fundamentação teórica}
-
 \begin{itemize}
-    \item Em análise numérica, o método de Newton, desenvolvido por Isaac Newton e Joseph Raphson, tem como objetivo estimar raízes de uma função, para isto escolhe-se uma aproximação inicial para esta e calcula-se a equação da reta tangente (através de uma derivada) da função neste ponto e a interseção dela com o eixo das abcissas, a fim de se encontrar uma melhor aproximação para a raíz. Repetindo-se o processo, cria-se um método iterativo para encontrarmos a raíz da função.
-    \item Fórmula do Método de Newton:
+	 \item Em análise numérica, o método de Newton, desenvolvido por Isaac Newton e Joseph Raphson, tem como objetivo estimar raízes de uma função, para isto escolhe-se uma aproximação inicial para esta e calcula-se a equação da reta tangente (através de uma derivada) da função neste ponto e a interseção dela com o eixo das abcissas, a fim de se encontrar uma melhor aproximação para a raiz. Repetindo-se o processo, cria-se um método iterativo para encontrarmos a raiz da função.
+    \item Fórmula do Método de Newton para funções de primeiro grau:
     \begin{equation}
         x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}, n \in \mathbb{N}
+    \end{equation}
+    \begin{center}
+        \small{\texttt{Onde o valor inicial de x é estimado no começo da iteração.}}
+    \end{center}
+    \item Fórmula do Método de Newton para funções de segundo grau:
+    \begin{equation}
+        x_{n+1} = x_n - \frac{f'(x_n)}{f''(x_n)}, n \in \mathbb{N}
     \end{equation}
     \begin{center}
         \small{\texttt{Onde o valor inicial de x é estimado no começo da iteração.}}
@@ -117,10 +123,10 @@ O método de Newton é um método iterativo de aproximação, geralmente utiliza
 \begin{itemize}
     \item O algoritmo é fundamentalmente o mesmo implementado em aulas com algumas pequenas alterações. 
     \item A função de ativação definida para uso foi a Limiar segundo conselho do professor. A rede neural artificial escolhida foi o Perceptron, novamente sob conselho do professor, dessa forma, não é possível lidar com mais de 2 camadas.
-    \item A Rede Neural Artifical Perceptron é inicializada com o número de entradas adequado ao caso e tem a função de ativação configurada junto do número de épocas e dos vetores de aprendizado (entrada e saída esperada).
-    \item Durante o aprendizado, atualiza-se os pesos da entradas a partir do valor inicial estimado, que no caso do algoritmo é gerado de forma aleatória entre 0,0 e 1,0. A cada iteração nova, calcula-se o erro até que este seja zerado, o que signifca que o valor desejado foi encontrado.
+    \item A Rede Neural Artificial Perceptron é inicializada com o número de entradas adequado ao caso e tem a função de ativação configurada junto do número de épocas e dos vetores de aprendizado (entrada e saída esperada).
+    \item Durante o aprendizado, atualiza-se os pesos da entradas a partir do valor inicial estimado, que no caso do algoritmo é gerado de forma aleatória entre 0,0 e 1,0. A cada iteração nova, calcula-se o erro até que este seja zerado, o que significa que o valor desejado foi encontrado.
     \item Utilizando o método de Newton, diferente do Método do Gradiente, temos a possibilidade de estar dividindo por 0, dessa forma trata-se esse caso somente replicando o valor da entrada para a próxima iteração.
-    \item No final da iteração mostra-se o erro total da epoca, caso seja 0 a execução foi bem sucedida, caso contrário não.
+    \item No final da iteração mostra-se o erro total da época, caso seja 0 a execução foi bem sucedida, caso contrário não.
     \item No caso de uma execução bem sucedida o valor de saída indicado na linha abaixo será de acordo com os dados de entrada.
     \item A ideia de usar o algoritmo pronto veio da própria sugestão do professor que nos orientou a somente fazer as mudanças no código ao invés de refatorá-lo inteiro. Pode-se aproveitar do código pronto e focar nas alterações necessárias com mais afinco visto que não precisamos nos preocupar com a funcionalidade do código que ja fora definida como confiável previamente.
 \end{itemize}
@@ -129,43 +135,31 @@ O método de Newton é um método iterativo de aproximação, geralmente utiliza
 
 \begin{itemize}
     \item Foi utilizado apenas a linguagem de programação Java para realização do trabalho.
-    \item As IDEs NetBeans e VSCode foram utilizadas para escrever o algoritmo. O serviço GitKraken foi utilizado para versionamento do mesmo. 
+    \item As IDEs NetBeans e VSCode foram utilizadas para escrever o algoritmo, assim como o GitHub foi utilizado como ferramenta para versionamento de código. Além disso, foi utilizado o GitKraken como interface para versionamento.
     \item Nenhuma biblioteca se mostrou necessária na implementação do Algoritmo.
-    \item Nenhuma base de dados se mostrou necessária na implementação do Algoritmo, apenas entradas baseadas em vetores de inteiros com suas respectivas saidas em outro vetor de inteiros.
+    \item Nenhuma base de dados se mostrou necessária na implementação do Algoritmo, apenas entradas baseadas em vetores de inteiros com suas respectivas saídas em outro vetor de inteiros.
 \end{itemize}
 
 \section{Código fonte}
-
 \begin{itemize}
-    \item Código fonte deverá ser enviado junto com este relatório.
-    \item Não enviar o programa compilado.
-    \item Descrever como compilar e executar o programa, se necessário.
-    \item Apresentar os aspectos mais importantes da implementação. Veja o exemplo a seguir.
+    \item A execução do código se dá apenas pela execução da Classe Main.
+    \item Na Classe Main, a variável dados[][] controla os dados de entrada, e saida[] os dados de saída esperada. A variável entrada[] define os valores que serão testados pelos neurônios e irão gerar sua resposta de acordo com o aprendizado feito anteriormente.
+    \item Classe Main
 \end{itemize}
 
 \lstinputlisting[language=Java]{codigo/Main.java}
 
+\begin{itemize}
+    \item Classe Perceptron
+\end{itemize}
+\lstinputlisting[language=Java]{codigo/Perceptron.java}
+
 \section{Conclusão}
 
 \begin{itemize}
-    \item Descrever os resultados obtidos com a aplicação do algoritmo sobre o contexto.
-    \item Descrever quaisquer limitações encontradas.
-    \item Descrever a contribuição do trabalho para a construção do conhecimento do grupo.
-\end{itemize}
-
-\noindent\textbf{Observações:} Serão avaliados: o relatório do trabalho prático, o código fonte e a aplicação do algoritmo sobre o contexto prático.
-
-\begin{equation}
-    NF = (NC+NR+NA)*0.1,
-\end{equation}
-
-\noindent onde:
-\begin{itemize}
-    \item $NF$: é a nota final do trabalho.
-    \item $NR$: é a nota sobre o relatório.
-    \item $NC$: é a nota da implementação, do código fonte do algoritmo e dos seus resultados sobre o contexto prático.
-    \item $NA$: é a nota da apresentação e arguição oral do trabalho.
-    \item $NC \in [0,10], NR \in [0,10], NA \in [0,10]$ e $NF \in [0,3]$.
+    \item Para aplicação do método de Newton, foram encontradas diversas limitações. O método exige diversos critérios para que os valores venham a convergir e assim obter-se o resultado. No entanto, não foi possível realizar essas verificações sem prejudicar o tempo de execução do código.
+    \item Como os valores iniciais são gerados de forma aleatória, em algumas execuções obtivemos os resultados esperados, mas na maioria os pesos divergem e tendem ao infinito, impedindo que o neurônio responda o grupo pertencente a entrada em questão.
+    \item O grupo apresentou grande dificuldade em entender e associar o método de newton com o aprendizado do neurônio artificial pois além de haver material escasso para consulta, o código implementado ainda não apresentou o resultado esperado.
 \end{itemize}
 
 \end{document}
